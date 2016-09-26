@@ -8,7 +8,9 @@ import java.io.IOException;
 public class MainClass {
     public static void main(String[] args) throws IOException {
         WebParser wp = new WebParser();
-        wp.parseYears(2013, 2014);
+
+        int Moskow = 4368;
+        wp.extractYearWeather(Moskow, 2015);
     }
 
 

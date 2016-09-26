@@ -12,12 +12,12 @@ public class WeatherEntry {
     private int pressure;
     private Clouds cloudy;
     private Events events;
-    private String wind;
+    private Wind wind;
 
     public WeatherEntry(int day,
                         int temperature, int pressure,
                         Clouds cloudy, Events events,
-                        String wind) {
+                        Wind wind) {
         this.day = day;
         this.temperature = temperature;
         this.pressure = pressure;
