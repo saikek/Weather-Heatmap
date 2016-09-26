@@ -1,6 +1,7 @@
 package com.cyberneticscore.weatherheatmap.skeleton;
 
 /**
+ * Weather Entry - complete table elements
  * Created by saikek on 25.9.16.
  */
 public class WeatherEntry {
