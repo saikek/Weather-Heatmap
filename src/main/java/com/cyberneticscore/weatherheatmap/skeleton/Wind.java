@@ -15,14 +15,16 @@ enum Direction {
     SOUTH,
     SOUTH_WEST,
     WEST,
-    NORTH_WEST
+    NORTH_WEST,
+    UNDEFINED
 }
 
 public class Wind {
     Direction direction;
     int power;
 
-    private static final String pattern = "([А-Я]+)\\s(\\d+)";
+    private static final String pattern = "([А-Я]+)?\\s(\\d+)";
+
     private static final Pattern r = Pattern.compile(pattern);
 
     public Wind(Direction direction, int power) {
@@ -31,7 +33,7 @@ public class Wind {
     }
 
     public static Wind getWind(String toParse) {
-        final Matcher m = r.matcher(toParse);
+        Matcher m = r.matcher(toParse);
 
         if (m.find()) {
             Direction direction = getDirection(m.group(1));
@@ -40,7 +42,18 @@ public class Wind {
             return new Wind(direction, power);
         }
 
-        throw new IllegalArgumentException("Unable to parse wind string" + toParse);
+        final String noDirectionPattern = "(\\d+)м/с";
+        final Pattern rNoDir = Pattern.compile(noDirectionPattern);
+
+        m = rNoDir.matcher(toParse);
+
+        if (m.find()){
+            int power = Integer.parseInt(m.group(1));
+
+            return new Wind(Direction.UNDEFINED, power);
+        }
+
+        throw new IllegalArgumentException("Unable to parse wind string: " + toParse);
     }
 
     private static Direction getDirection(String directionString) {
